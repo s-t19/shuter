@@ -62,6 +62,16 @@ class Bullet(GameSprite):
         if self.rect.y < 0:
             self.kill()
 
+#class Bonus(GameSprite):
+ #   def update(self):
+  #      self.rect.y += self.speed
+#
+ #       if self.rect.y >= win_h:
+  #          self.rect.y = 0
+   #         self.rect.x = randint(5, win_w - 70)
+    #        self.speed = 3
+        
+
 
 
 win_w = 700
@@ -75,6 +85,7 @@ background = transform.scale(
     (win_w, win_h)
 )
 player = Player(5, win_w/ - 65/2, win_h - 65, 'rocket.png', 65, 65)
+#bonus = Bonus(3, randint(5, win_w - 70), 0, 'bon.jpg', 65, 65)
 
 monsters = sprite.Group()
 for i in range(5):
@@ -158,17 +169,26 @@ while run:
         for i in enemy_collides:
             life_player -= 1
             i.kill()
+
+
+        #bonus_collides = sprite.spritecollide(player, bonus, )
         text_life = font1.render('жизни:' + str(life_player), 1, (255, 255, 255))
         window.blit(text_life, (5, 65))
-        if lost >= 100 or life_player <= 0:
+        if lost >= 10 or life_player <= 0:
             finish = True
             result_text = lose_text
             start_time = time.get_ticks()
 
-        if score >= 6:
-            monster.speed == 5
-            monster = Enemy(randint(2, 4), randint(5, win_w - 70), 0,'ufo.png', 65, 40)
-            monsters.add(monster)
+        if score >= 5:
+            finish = True
+            result_text = win_text
+            start_time = time.get_ticks()
+
+
+        #if score >= 6:
+         #   monster.speed == 5
+          #  monster = Enemy(randint(2, 4), randint(5, win_w - 70), 0,'ufo.png', 65, 40)
+           # monsters.add(monster)
 
 
         
@@ -180,6 +200,8 @@ while run:
         player.reset()
         asteroids.update()
         asteroids.draw(window)
+        #bonus.update()
+        #bonus.reset()
 
         bullets.update()
         bullets.draw(window)
