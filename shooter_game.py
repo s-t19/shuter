@@ -24,7 +24,10 @@ class Player(GameSprite):
             self.rect.x -= self.speed
         if keys[K_d] and self.rect.x < win_w - 70:
             self.rect.x += self.speed
-        
+        if keys[K_w] and self.rect.y > 5:
+            self.rect.y -= self.speed
+        if keys[K_s] and self.rect.y < win_h - 70:
+            self.rect.y += self.speed
 
     def fire(self):
         bullet = Bullet(15, self.rect.x - 8, self.rect.top, 'bullet.png', 16, 20)
@@ -157,15 +160,17 @@ while run:
             i.kill()
         text_life = font1.render('жизни:' + str(life_player), 1, (255, 255, 255))
         window.blit(text_life, (5, 65))
-        if lost >= 3 or life_player <= 0:
+        if lost >= 100 or life_player <= 0:
             finish = True
             result_text = lose_text
             start_time = time.get_ticks()
 
-        if score >= 10:
-            finish = True
-            result_text = win_text
-            start_time = time.get_ticks()
+        if score >= 6:
+            monster.speed == 5
+            monster = Enemy(randint(2, 4), randint(5, win_w - 70), 0,'ufo.png', 65, 40)
+            monsters.add(monster)
+
+
         
 
 
